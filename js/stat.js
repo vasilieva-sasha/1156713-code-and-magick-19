@@ -47,13 +47,19 @@
     return maxTime;
   }
 
+  function generateColor(max) {
+    var digit = Math.random() * max;
+    return Math.floor(digit);
+  }
+
   function drawBars(ctx, names, times) {
     for (var j = 0; j <= names.length - 1; j++) {
 
-      names[j] === 'Вы' ? ctx.fillStyle = 'rgba(255, 0, 0, 1)' : ctx.fillStyle = barsColor;
+      var color = names[j] === 'Вы' ? ctx.fillStyle = 'rgba(255, 0, 0, 1)' : ctx.fillStyle = barsColor;
 
-      barsColor = 'hsla(240,' + Math.floor(Math.random() * (100)) + '%,50%)';
+      barsColor = 'hsla(240,' + generateColor(100) + '%,50%)';
       barsLength = times[j] / findBestTime(times) * MAX_BAR;
+      ctx.fillStyle = color;
       ctx.fillRect(COORD_X + BAR_WIDTH + (BAR_WIDTH + BAR_GAP) * j, MAX_BAR - barsLength + 100, BAR_WIDTH, barsLength);
       ctx.fillStyle = TEXT_COLOR;
       ctx.fillText(names[j], COORD_X + BAR_WIDTH + (BAR_WIDTH + BAR_GAP) * j, MAX_BAR + 120);
