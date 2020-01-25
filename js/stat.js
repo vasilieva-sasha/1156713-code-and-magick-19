@@ -14,7 +14,6 @@
   var BAR_WIDTH = 40;
   var MAX_BAR = 150;
 
-  var barsColor = [];
   var barsLength = [];
 
   function drawCloud(ctx) {
@@ -52,13 +51,12 @@
     return Math.floor(digit);
   }
 
-  function drawBars(ctx, names, times) {
+  function drawBars(ctx, names, times, maxTime) {
     for (var j = 0; j <= names.length - 1; j++) {
 
-      var color = names[j] === 'Вы' ? ctx.fillStyle = 'rgba(255, 0, 0, 1)' : ctx.fillStyle = barsColor;
+      var color = names[j] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsla(240,' + generateColor(100) + '%,50%)';
 
-      barsColor = 'hsla(240,' + generateColor(100) + '%,50%)';
-      barsLength = times[j] / findBestTime(times) * MAX_BAR;
+      barsLength = times[j] / maxTime * MAX_BAR;
       ctx.fillStyle = color;
       ctx.fillRect(COORD_X + BAR_WIDTH + (BAR_WIDTH + BAR_GAP) * j, MAX_BAR - barsLength + 100, BAR_WIDTH, barsLength);
       ctx.fillStyle = TEXT_COLOR;
@@ -69,6 +67,7 @@
 
   window.renderStatistics = function (ctx, names, times) {
     renderCloud(ctx);
+    findBestTime(times);
     drawBars(ctx, names, times);
   };
 })();
