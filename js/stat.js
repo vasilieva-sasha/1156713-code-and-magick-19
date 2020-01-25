@@ -35,7 +35,7 @@
     writeText(ctx);
   }
 
-  function findBestTime(times) {
+  function findMaxTime(times) {
     var maxTime = times[0];
     for (var i = 0; i <= times.length - 1; i++) {
 
@@ -51,7 +51,9 @@
     return Math.floor(digit);
   }
 
-  function drawBars(ctx, names, times, maxTime) {
+  function drawBars(ctx, names, times) {
+    var maxTime = findMaxTime(times);
+
     for (var j = 0; j <= names.length - 1; j++) {
 
       var color = names[j] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsla(240,' + generateColor(100) + '%,50%)';
@@ -67,7 +69,6 @@
 
   window.renderStatistics = function (ctx, names, times) {
     renderCloud(ctx);
-    findBestTime(times);
     drawBars(ctx, names, times);
   };
 })();
