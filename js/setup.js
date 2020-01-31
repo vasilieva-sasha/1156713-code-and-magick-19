@@ -36,7 +36,7 @@ document.querySelector('.setup').classList.remove('hidden');
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-var createWizard = function (character) { // изменила название функции
+var createWizard = function (character) {
   var wizard = similarWizardTemplate.cloneNode(true);
   wizard.querySelector('.setup-similar-label').textContent = character.name;
   wizard.querySelector('.wizard-coat').style.fill = character.coatColor;
@@ -46,15 +46,13 @@ var createWizard = function (character) { // изменила название �
 
 var fragment = document.createDocumentFragment();
 
-var renderWizard = function (character) { // добавила функцию с публикацией героя
+var renderWizard = function (character) {
   fragment.appendChild(createWizard(character));
 };
 
-characters.forEach(renderWizard(аргумент)); // как передать сюда элемент массива?
-
-// for (var i = 0; i < characters.length; i++) {
-//   fragment.appendChild(renderWizard(characters[i]));
-// }
+characters.forEach(function (character) {
+  renderWizard(character);
+});
 
 similarListElement.appendChild(fragment);
 document.querySelector('.setup-similar').classList.remove('hidden');
