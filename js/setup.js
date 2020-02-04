@@ -129,4 +129,3 @@ characters.forEach(function (character) {
 
 similarListElement.appendChild(fragment);
 document.querySelector('.setup-similar').classList.remove('hidden');
-
