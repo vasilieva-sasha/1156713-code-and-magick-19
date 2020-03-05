@@ -8,6 +8,7 @@
   var setupWindowOpen = document.querySelector('.setup-open');
   var setupWindowClose = setupWindow.querySelector('.setup-close');
   var wizardNameInput = setupWindow.querySelector('.setup-user-name');
+  var setupForm = setupWindow.querySelector('.setup-wizard-form');
 
   var onSetupEscPress = function (evt) {
     if (wizardNameInput === document.activeElement) {
@@ -49,6 +50,13 @@
     if (evt.key === ENTER_KEY) {
       closeSetup();
     }
+  });
+
+  setupForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(setupForm), function () {
+      setupWindow.classList.add('hidden');
+    }, window.backend.errorShow);
+    evt.preventDefault();
   });
 
   window.dialog = {
